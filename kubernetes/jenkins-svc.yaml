@@ -1,0 +1,26 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: jenkins-service
+  namespace: development
+spec:
+  selector:
+    app: jenkins
+  ports:
+  - name: jenkins
+    port: 8080
+    targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-discovery
+  namespace: development
+spec:
+  selector:
+    app: master
+  ports:
+  - protocol: TCP
+    port: 50000
+    targetPort: 50000
+    name: slaves
